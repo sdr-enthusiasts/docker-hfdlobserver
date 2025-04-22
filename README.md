@@ -12,4 +12,4 @@ Builds and runs on `amd64`, `arm64` architectures.
 
 ## Setup
 
-Follow the example docker-compose.yml in this repository. You will need to mount a volume in the container at `/run/hfdlobserver` with a `settings.yaml` file in it. The `compose/settings.yaml` file is a nice starting point. Please uncomment relevant lines and change addresses as appropriate.
+Follow the example docker-compose.yml in this repository. You will need to mount a volume in the container at `/run/hfdlobserver` with a `settings.yaml` file in it. The `compose/settings.yaml` file is a nice starting point. Please uncomment relevant lines and change addresses as appropriate. The file is well commented so work it from top to bottom to get your settings.yaml file.
