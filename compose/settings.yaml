@@ -11,10 +11,10 @@ dumphfdl:
     # statsd_server: 10.10.10.63:8125
     # other settings
     output:
-      # # examples, if you have your own set, you can reuse them here.
-      # # Acarshub
-      # - output: acars_router
+      # # acarsrouter
+      # - format: tcp
       #   address: 127.0.0.1
+      #   port: 5556
       # # TAR1090
       # - format: basestation
       #   protocol: tcp
@@ -23,16 +23,15 @@ dumphfdl:
       # # text
       # - format: text
       #   protocol: udp
-      #   mode: client
       #   address:
       #   port: 2259
-      #watchGS
-      #- format: text
-      #  protocol: udp
-      #  address: 10.10.10.118
-      #  port: 5558
+      # a text output over tcp
+      # - format: text
+      #   protocol: udp
+      #   address: 127.0.0.1
+      #   port: 5000
       #observer feed
-      - output: hfdl_observer
+      # - output: hfdl_observer
 observer:
   all_receivers:
     - name: web888-01
