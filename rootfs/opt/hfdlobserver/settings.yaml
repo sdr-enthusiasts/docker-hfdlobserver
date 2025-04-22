@@ -1,0 +1,31 @@
+configs:
+  client:
+    default:
+      address: {}
+      port: {}
+      recorder_path: kiwiclient/kiwirecorder.py
+  decoder:
+    default:
+      station_id: {}
+      output: {}
+observer888:
+  all_receivers:
+    observer-01: {}
+    observer-02: {}
+    observer-03: {}
+    observer-04: {}
+    observer-05: {}
+    observer-06: {}
+    observer-07: {}
+    observer-08: {}
+    observer-09: {}
+    observer-10: {}
+    observer-11: {}
+    observer-12: {}
+    observer-13: {}
+  conductor:
+    ranked_stations: {}
+  tracker:
+    station_updates:
+      - period: 61
+        url: https://hfdl.observer/active.json
