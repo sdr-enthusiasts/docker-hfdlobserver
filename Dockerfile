@@ -1,10 +1,6 @@
 FROM ghcr.io/sdr-enthusiasts/docker-baseimage:acars-decoder-soapy
 
-ENV \
-  # Set the default user to root
-  WEB888_URL="http://web-888.local" \
-  WEB888_PORT="8073"
-# Set
+# ENV \
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -62,6 +58,7 @@ RUN set -x && \
   mkdir -p /opt/hfdlobserver && \
   pushd /opt/hfdlobserver && \
   git clone https://github.com/hfdl-observer/hfdlobserver888.git . && \
+  git checkout origin/feature/zeroes && \
   mkdir .virtualenvs && \
   python3 -m venv .virtualenvs/hfdlobserver888 && \
   source .virtualenvs/hfdlobserver888/bin/activate && \

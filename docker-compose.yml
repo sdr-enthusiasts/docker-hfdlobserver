@@ -7,3 +7,5 @@ services:
       - WEB888_PORT=8073
       #- FEED_ID=CS-KABQ-HFDL
       - RANKED_STATIONS=1, 4, 11, 9, 2, 3, 7, 13, 17, 14, 10, 16, 5, 15, 6, 8
+    volumes:
+      - ./compose:/run/hfdlobserver
