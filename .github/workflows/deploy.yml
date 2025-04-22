@@ -12,18 +12,6 @@ on:
         type: boolean
         description: "Use base image testpr"
         default: false
-
-  # Build and deploy the image on pushes to main branch
-  push:
-    branches:
-      - main
-    paths:
-      - "Dockerfile"
-      - "rootfs/**"
-
-  # Build and deploy the image nightly (to ensure we pick up any security updates)
-  # schedule:
-  #   - cron: "0 14 * * *"
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
