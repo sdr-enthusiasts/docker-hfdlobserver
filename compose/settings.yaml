@@ -2,6 +2,7 @@ receivers:
   web888:
     receiver: web888
     client:
+      # change the address below to your web888 device's ip address
       address: 192.168.31.25
       port: 8073
       recorder_path: kiwiclient/kiwirecorder.py
