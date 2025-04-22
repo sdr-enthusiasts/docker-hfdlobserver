@@ -12,7 +12,8 @@ dumphfdl:
     # other settings
     output:
       # # acarsrouter
-      # - format: tcp
+      # - format: json
+      #   protocol: tcp
       #   address: 127.0.0.1
       #   port: 5556
       # # TAR1090
