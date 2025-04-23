@@ -112,6 +112,13 @@ observer:
     # │ 17 - Canarias, Spain
     # you should, ideally, be picking stations in order of what is closest to you and 
     # moving further away
+    # if you want to have the container do it's best guess for you, run the following command:
+    # docker run -it -e SKIP_CHECKS=true ghcr.io/sdr-enthusiasts/docker-hfdlobserver:latest /scripts/freq_picker.sh <lat> <lon>
+    # and check the output. You will see something like:
+    # docker run -it -e SKIP_CHECKS=true ghcr.io/sdr-enthusiasts/docker-hfdlobserver:latest /scripts/freq_picker.sh 35.6 -106.5
+    # <snip>
+    # This line can be used in settings.yaml (indent it properly):
+    # ranked_stations: [1, 4, 11, 9, 2, 3, 7, 13, 17, 14, 10, 16, 5, 15, 6, 8]
     ranked_stations: [1, 4, 11, 9, 2, 3, 7, 13, 17, 14, 10, 16, 5, 15, 6, 8]
 cui:
   ticker:
