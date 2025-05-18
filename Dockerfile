@@ -59,7 +59,7 @@ RUN set -x && \
   mkdir -p /opt/hfdlobserver && \
   pushd /opt/hfdlobserver && \
   git clone https://github.com/hfdl-observer/hfdlobserver888.git . && \
-  git checkout origin/feature/zeroes && \
+  #git checkout origin/feature/zeroes && \
   mkdir .virtualenvs && \
   python3 -m venv .virtualenvs/hfdlobserver888 && \
   source .virtualenvs/hfdlobserver888/bin/activate && \
