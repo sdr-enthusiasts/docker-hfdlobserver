@@ -70,6 +70,8 @@ RUN set -x && \
   # Clean up
   apt-get remove -y "${TEMP_PACKAGES[@]}" && \
   apt-get autoremove -y && \
+  { find /opt/hfdlobserver/.virtualenvs | grep -E "/__pycache__$" | xargs rm -rf || true; } && \
+  bash /scripts/clean-build.sh && \
   rm -rf /src/* /tmp/* /var/lib/apt/lists/*
 
 
