@@ -41,14 +41,14 @@ RUN set -x && \
   "${TEMP_PACKAGES[@]}"\
   && \
   # Install statsd-c-client library
-  git clone https://github.com/romanbsd/statsd-c-client.git /src/statsd-client && \
+  git clone --depth=1 https://github.com/romanbsd/statsd-c-client.git /src/statsd-client && \
   pushd /src/statsd-client && \
   make -j "$(nproc)" && \
   make install && \
   ldconfig && \
   popd && \
   # Install dumphfdl
-  git clone https://github.com/szpajder/dumphfdl.git /src/dumphfdl && \
+  git clone --depth=1 https://github.com/szpajder/dumphfdl.git /src/dumphfdl && \
   pushd /src/dumphfdl && \
   mkdir -p /src/dumphfdl/build && \
   pushd /src/dumphfdl/build && \
@@ -58,13 +58,13 @@ RUN set -x && \
   # Install hfdlobserver
   mkdir -p /opt/hfdlobserver && \
   pushd /opt/hfdlobserver && \
-  git clone https://github.com/hfdl-observer/hfdlobserver888.git . && \
+  git clone --depth=1 https://github.com/hfdl-observer/hfdlobserver888.git . && \
   #git checkout origin/feature/zeroes && \
   mkdir .virtualenvs && \
   python3 -m venv .virtualenvs/hfdlobserver888 && \
   source .virtualenvs/hfdlobserver888/bin/activate && \
   python3 -m pip install --no-cache-dir -r requirements.txt && \
-  git clone https://github.com/jks-prv/kiwiclient.git && \
+  git clone --depth=1 https://github.com/jks-prv/kiwiclient.git && \
   deactivate && \
   popd && \
   # Clean up
