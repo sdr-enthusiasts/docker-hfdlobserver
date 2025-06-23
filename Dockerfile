@@ -33,6 +33,7 @@ RUN set -x && \
   KEPT_PACKAGES+=(python3-minimal) && \
   KEPT_PACKAGES+=(python3-venv) && \
   TEMP_PACKAGES+=(python3-pip) && \
+  TEMP_PACKAGES+=(python3-dev) && \
   KEPT_PACKAGES+=(whiptail) && \
   # install packages
   apt-get update && \
