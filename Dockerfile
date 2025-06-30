@@ -18,7 +18,6 @@ RUN set -x && \
   TEMP_PACKAGES+=(wget) && \
   # packages for hfdlobserver
   TEMP_PACKAGES+=(libglib2.0-dev) && \
-  KEPT_PACKAGES+=(libglib2.0-0) && \
   # if we are on trixie, we want libglib2.0-0t64, otherwise we want libglib2.0-0
   . /etc/os-release && \
   # distro="$ID" && \
