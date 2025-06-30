@@ -19,8 +19,21 @@ RUN set -x && \
   # packages for hfdlobserver
   TEMP_PACKAGES+=(libglib2.0-dev) && \
   KEPT_PACKAGES+=(libglib2.0-0) && \
-  TEMP_PACKAGES+=(libconfig++-dev) && \
+  # if we are on trixie, we want libglib2.0-0t64, otherwise we want libglib2.0-0
+  . /etc/os-release && \
+  # distro="$ID" && \
+  # version="$VERSION_ID" && \
+  codename="$VERSION_CODENAME" && \
+  if [[ "$codename" == "trixie" ]]; then \
+  KEPT_PACKAGES+=(libglib2.0-0t64) && \
+  KEPT_PACKAGES+=(libconfig++11) && \
+  branch="devel"; \
+  else \
+  KEPT_PACKAGES+=(libglib2.0-0) && \
   KEPT_PACKAGES+=(libconfig++9v5) && \
+  branch="master"; \
+  fi && \
+  TEMP_PACKAGES+=(libconfig++-dev) && \
   KEPT_PACKAGES+=(libliquid-dev) && \
   TEMP_PACKAGES+=(libfftw3-dev) && \
   KEPT_PACKAGES+=(libfftw3-bin) && \
@@ -49,7 +62,7 @@ RUN set -x && \
   ldconfig && \
   popd && \
   # Install dumphfdl
-  git clone --depth=1 https://github.com/szpajder/dumphfdl.git /src/dumphfdl && \
+  git clone -b "$branch" https://github.com/szpajder/dumphfdl.git /src/dumphfdl && \
   pushd /src/dumphfdl && \
   mkdir -p /src/dumphfdl/build && \
   pushd /src/dumphfdl/build && \
