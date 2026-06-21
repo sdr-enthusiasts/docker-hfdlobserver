@@ -1,2 +1,6 @@
 compose
 docker-compose.yml
+.direnv
+source-stubs
+.pre-commit-config.yaml
+.envrc

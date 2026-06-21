@@ -16,7 +16,7 @@ dumphfdl:
     # other settings
     #
     # These are the outputs, or, where you'll send your HFDL data
-    
+
     output:
       # If you run acars hub, you likely have acars router as part of your config
       # uncomment the lines below of acasrs router. The only line you'll need to change
@@ -92,7 +92,7 @@ observer:
     #ignored_frequencies: [[0,2000],[22000,30000]]
 
     # the last section you will want to mess with is this. This section tells
-    # hfdlobserver what frequencies to prioritize. 
+    # hfdlobserver what frequencies to prioritize.
     # the numbers in the list correspond to the following stations
     # │ 1 - San Francisco, California                                                                                                                                                                        │
     # │ 2 - Molokai, Hawaii                                                                                                                                                                                  │
@@ -110,7 +110,7 @@ observer:
     # │ 15 - Al Muharraq, Bahrain                                                                                                                                                                            │
     # │ 16 - Agana, Guam                                                                                                                                                                                     │
     # │ 17 - Canarias, Spain
-    # you should, ideally, be picking stations in order of what is closest to you and 
+    # you should, ideally, be picking stations in order of what is closest to you and
     # moving further away
     # if you want to have the container do it's best guess for you, run the following command:
     # docker run -it -e SKIP_CHECKS=true ghcr.io/sdr-enthusiasts/docker-hfdlobserver:latest /scripts/freq_picker.sh <lat> <lon>
