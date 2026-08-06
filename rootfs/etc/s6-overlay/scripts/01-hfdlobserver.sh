@@ -19,7 +19,7 @@ fi
 
 if [ ! -f /run/hfdlobserver/settings.yaml ] && [ ! -f /run/hfdlobserver/settings.yml ]; then
   "${s6wrap[@]}" echo "Error: /run/hfdlobserver/settings.yaml not found. Please mount a volume to /run/settings with your settings.yaml file."
-  exit 1
+  exit 78
 fi
 
 "${s6wrap[@]}" echo "Found HFDLobserver settings file, copying to /opt/hfdlobserver/settings.yaml"
