@@ -23,12 +23,10 @@ RUN set -x && \
     # distro="$ID" && \
     # version="$VERSION_ID" && \
     codename="$VERSION_CODENAME" && \
-    if [[ "$codename" == "trixie" ]]; then \
-    KEPT_PACKAGES+=(libglib2.0-0t64) && \
-    KEPT_PACKAGES+=(libconfig++11);  \
+    if [[ "$codename" == "bookworm" ]]; then \
+    KEPT_PACKAGES+=(libglib2.0-0); \
     else \
-    KEPT_PACKAGES+=(libglib2.0-0) && \
-    KEPT_PACKAGES+=(libconfig++9v5); \
+    KEPT_PACKAGES+=(libglib2.0-0t64); \
     fi && \
     TEMP_PACKAGES+=(libconfig++-dev) && \
     KEPT_PACKAGES+=(libliquid-dev) && \
@@ -37,7 +35,6 @@ RUN set -x && \
     TEMP_PACKAGES+=(zlib1g-dev) && \
     KEPT_PACKAGES+=(zlib1g) && \
     TEMP_PACKAGES+=(libxml2-dev) && \
-    KEPT_PACKAGES+=(libxml2) && \
     TEMP_PACKAGES+=(libjansson-dev) && \
     KEPT_PACKAGES+=(libjansson4) && \
     KEPT_PACKAGES+=(python3-minimal) && \
@@ -47,6 +44,15 @@ RUN set -x && \
     KEPT_PACKAGES+=(whiptail) && \
     # install packages
     apt-get update && \
+    # Runtime library packages are renamed with Debian releases (soname bumps), so
+    # resolve the one each -dev package depends on instead of naming a version.
+    runtime_pkg() { \
+    p="$(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances "$1" | sed -nE "s/^ *Depends: ($2)\$/\1/p" | head -n1)"; \
+    if [ -z "$p" ]; then echo "no runtime package matching $2 for $1" >&2; return 1; fi; \
+    echo "$p"; \
+    } && \
+    KEPT_PACKAGES+=("$(runtime_pkg libconfig++-dev 'libconfig\+\+[0-9]+')") && \
+    KEPT_PACKAGES+=("$(runtime_pkg libxml2-dev 'libxml2(-[0-9]+)?')") && \
     apt-get install -y --no-install-recommends \
     "${KEPT_PACKAGES[@]}" \
     "${TEMP_PACKAGES[@]}"\
