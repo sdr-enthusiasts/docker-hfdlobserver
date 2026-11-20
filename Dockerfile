@@ -2,6 +2,8 @@ FROM ghcr.io/sdr-enthusiasts/docker-baseimage:acars-decoder-soapy
 
 # ENV \
 
+ARG HFDLOBSERVER_VERSION=v0.1.4
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3008,SC2086,SC2039,SC1091
@@ -57,37 +59,24 @@ RUN set -x && \
     "${KEPT_PACKAGES[@]}" \
     "${TEMP_PACKAGES[@]}"\
     && \
-    # Install statsd-c-client library
+    # Install statsd-c-client library. dumphfdl only enables statsd support
+    # when it can find this library installed on the system.
     git clone --depth=1 https://github.com/romanbsd/statsd-c-client.git /src/statsd-client && \
     pushd /src/statsd-client && \
     make -j "$(nproc)" && \
     make install && \
     ldconfig && \
     popd && \
-    # Install dumphfdl
-    git clone -b master https://github.com/szpajder/dumphfdl.git /src/dumphfdl && \
-    pushd /src/dumphfdl && \
-    mkdir -p /src/dumphfdl/build && \
-    pushd /src/dumphfdl/build && \
-    cmake ../ -DCMAKE_BUILD_TYPE=Release && \
-    make && \
-    make install && \
-    # Install hfdlobserver
+    # Install hfdlobserver. The package build compiles its own dumphfdl and
+    # bundles kiwiclient.
     mkdir -p /opt/hfdlobserver && \
-    pushd /opt/hfdlobserver && \
-    git clone --depth=1 https://github.com/hfdl-observer/hfdlobserver888.git . && \
-    #git checkout origin/feature/zeroes && \
-    mkdir .virtualenvs && \
-    python3 -m venv .virtualenvs/hfdlobserver888 && \
-    source .virtualenvs/hfdlobserver888/bin/activate && \
-    python3 -m pip install --no-cache-dir -r requirements.txt && \
-    git clone --depth=1 https://github.com/jks-prv/kiwiclient.git && \
-    deactivate && \
-    popd && \
+    python3 -m venv /opt/hfdlobserver/venv && \
+    /opt/hfdlobserver/venv/bin/python3 -m pip install --no-cache-dir --no-binary hfdlobserver \
+    "git+https://codeberg.org/hfdl-observer/hfdlobserver@${HFDLOBSERVER_VERSION}" && \
     # Clean up
     apt-get remove -y "${TEMP_PACKAGES[@]}" && \
     apt-get autoremove -y && \
-    { find /opt/hfdlobserver/.virtualenvs | grep -E "/__pycache__$" | xargs rm -rf || true; } && \
+    { find /opt/hfdlobserver/venv | grep -E "/__pycache__$" | xargs rm -rf || true; } && \
     bash /scripts/clean-build.sh && \
     rm -rf /src/* /tmp/* /var/lib/apt/lists/*
 
