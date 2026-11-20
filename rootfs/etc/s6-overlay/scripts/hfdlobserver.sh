@@ -12,7 +12,7 @@ s6wrap=(s6wrap --quiet --timestamps --prepend="$SCRIPT_NAME" --args)
 
 "${s6wrap[@]}" echo "Starting $SCRIPT_NAME..."
 #"${s6wrap[@]}" pushd /opt/hfdlobserver || exit 1
-env HOME=/opt/hfdlobserver "${s6wrap[@]}" /opt/hfdlobserver/hfdlobserver.sh --headless
+env HOME=/opt/hfdlobserver "${s6wrap[@]}" /opt/hfdlobserver/venv/bin/hfdlobserver --headless --config /opt/hfdlobserver/settings.yaml
 
 "${s6wrap[@]}" echo "Adnormal exit of $SCRIPT_NAME."
 "${s6wrap[@]}" pkill -f kiwirecoder

@@ -5,7 +5,6 @@ receivers:
       # change the address below to your web888 device's ip address
       address: 192.168.31.25
       port: 8073
-      recorder_path: kiwiclient/kiwirecorder.py
 dumphfdl:
   default:
     # please set a station id here
@@ -16,6 +15,7 @@ dumphfdl:
     # other settings
     #
     # These are the outputs, or, where you'll send your HFDL data
+    # At least one output below must be uncommented, otherwise hfdlobserver will fail to start.
 
     output:
       # If you run acars hub, you likely have acars router as part of your config
@@ -60,7 +60,7 @@ dumphfdl:
 # unless you have a specific setup, leave most of this alone
 
 observer:
-  all_receivers:
+  local_receivers:
     - name: web888-01
       receiver: web888
     - name: web888-02

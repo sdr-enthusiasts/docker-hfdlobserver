@@ -11,8 +11,6 @@ SCRIPT_NAME="${SCRIPT_NAME%.*}"
 s6wrap=(s6wrap --quiet --timestamps --prepend="$SCRIPT_NAME" --args)
 #"${s6wrap[@]}" pushd /opt/hfdlobserver || exit 69
 
-source /opt/hfdlobserver/.virtualenvs/hfdlobserver888/bin/activate
-
 # get the first argument
 if [ -z "$1" ]; then
   echo "Usage: $SCRIPT_NAME <lat> <lon>"
@@ -28,4 +26,4 @@ fi
 
 lon="$2"
 
-env HOME=/opt/hfdlobserver python3 /opt/hfdlobserver/extras/guess_station_ranking.py "$lat" "$lon"
+env HOME=/opt/hfdlobserver /opt/hfdlobserver/venv/bin/hfdlobserver-guess-stations -- "$lat" "$lon"
